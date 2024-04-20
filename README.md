@@ -16,3 +16,7 @@ Most importantly, this time I'm creating a GitHub workflow where I have created 
 
 ### Branch Merges
 I'm also going to merge branches using GitHub's "Pull Request" feature rathere than Git's "merge" feature. I've never done that before and I need the experience.
+
+#### Git Is Difficult
+If you make one tiny mistake your whole project is now overwhelmingly confusing.
+I made the mistake of editing something in main without adding/committing/pushing it. Then I created a new branch. Now I have updates in the new branch as well as the one small update in the main branch and I cannot get them to merge both locally and in the remote repository. It seems that it's one or the other and they keep writing over each other.
