@@ -1,9 +1,8 @@
 <?php
 
+use App\Http\Requests\TaskRequest;
 use \App\Models\Task;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,36 +12,28 @@ Route::get('/', function () {
 Route::prefix('/tasks')->group(function () {
 
     Route::get('/', function () {
-        return view('index', [
-            'tasks' => Task::latest()->get()
-        ]);
-    })->name('/tasks.index');
+        return view('index')->with('tasks', Task::latest()->get());
+    })->name('tasks.index');
 
     Route::view('/create', 'create')->name('tasks.create');
 
-    Route::get('/{id}', function ($id) {
-        return view('show', [
-            'task' => Task::findOrFail($id)
-        ]);
+    Route::get('/{task}/edit', function (Task $task) {
+        return view('edit')->with('task', $task);
+    })->name('tasks.edit');
+
+    Route::get('/{task}', function (Task $task) {
+        return view('show')->with('task', $task);
     })->name('tasks.show');
 
-    Route::post('/', function (Request $request) {
-        $data = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
-            'notes' => ['nullable', 'string'],
-            'due_date' => [
-                'nullable', 'date',
-                function($attribute, $value, $fail) {
-                    if (strtotime($value) < strtotime('today')) {
-                        $fail('Due Date must be a date of today or after.');
-                    }
-                }],
-        ]);
-        $task = Task::create($data);
-        $task->save();
-        return redirect()->route('tasks.show', $task->id)
+    Route::post('/', function (TaskRequest $request) {
+        $task = Task::create($request->validated());
+        return redirect()->route('tasks.show', $task)
             ->with('success', 'Task created successfully!');
     })->name('tasks.store');
 
+    Route::put('/{task}', function (TaskRequest $request, Task $task) {
+        $task->update($request->validated());
+        return redirect()->route('tasks.show', $task)
+            ->with('success', 'Task updated successfully!');
+    })->name('tasks.update');
 });
