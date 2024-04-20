@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class TaskFactory extends Factory
             'description' => fake()->paragraph,
             'notes' => fake()->paragraph(7, true),
             'completed' => fake()->boolean,
+            'due_date' => fake()->boolean ? Carbon::now()->addDays(fake()->numberBetween(1, 14)) : null,
         ];
     }
 }
