@@ -3,7 +3,10 @@
 @section('title', 'Tasks List')
 
 @section('content')
-    <p>Welcome to the main page</p>
+    <h1>Welcome to the main page</h1>
+    <div>
+        <a href="{{ route('tasks.create') }}">Create a new task</a>
+    </div>
     <div>
         @forelse ($tasks as $task)
             <div>
