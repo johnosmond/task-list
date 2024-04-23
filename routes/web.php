@@ -36,4 +36,10 @@ Route::prefix('/tasks')->group(function () {
         return redirect()->route('tasks.show', $task)
             ->with('success', 'Task updated successfully!');
     })->name('tasks.update');
+
+    Route::delete('/{task}', function (Task $task) {
+        $task->delete();
+        return redirect()->route('tasks.index')
+            ->with('success', 'Task deleted successfully!');
+    })->name('tasks.destroy');
 });
