@@ -12,7 +12,7 @@ Route::get('/', function () {
 Route::prefix('/tasks')->group(function () {
 
     Route::get('/', function () {
-        return view('index')->with('tasks', Task::latest()->get());
+        return view('index')->with('tasks', Task::latest()->paginate());
     })->name('tasks.index');
 
     Route::view('/create', 'create')->name('tasks.create');
