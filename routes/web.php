@@ -42,4 +42,10 @@ Route::prefix('/tasks')->group(function () {
         return redirect()->route('tasks.index')
             ->with('success', 'Task deleted successfully!');
     })->name('tasks.destroy');
+
+    Route::patch('/{task}/toggle-complete', function (Task $task) {
+        $message = $task->toggleComplete(); // defined in model
+        return redirect()->back()
+            ->with('success', $message);
+    })->name('tasks.toggle-complete');
 });
