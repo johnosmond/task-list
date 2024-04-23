@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Laravel Task List App</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+
     {{-- blade-formater-disable --}}
     <style type="text/tailwindcss">
         .btn {
@@ -38,24 +40,38 @@
         .error {
             @apply text-red-500 text-sm;
         }
+
         .success {
             @apply mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative;
         }
     </style>
     {{-- blade-formater-enable --}}
-    @yield('styles')
+
 </head>
 
 <body class="container mx-auto mt-10 mb-10 max-w-lg">
+
     <h1 class="text-2xl mb-4">@yield('title')</h1>
-    @if (session('success'))
-        <div class="success">
-            <p>{{ session('success') }}</p>
-        </div>
-    @endif
+
+    <div x-data="{ flash: true }">
+        @if (session('success'))
+            <div x-show="flash" class="success" role="alert">
+                <p>{{ session('success') }}</p>
+                <span class="absolute top-0 right-0 mx-4 my-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor" @click="flash = false">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </span>
+            </div>
+        @endif
+    </div>
+
     <div>
         @yield('content')
     </div>
+
 </body>
 
 </html>
