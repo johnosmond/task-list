@@ -20,3 +20,6 @@ I'm also going to merge branches using GitHub's "Pull Request" feature rathere t
 #### Git Is Difficult
 If you make one tiny mistake your whole project is now overwhelmingly confusing.
 I made the mistake of editing something in main without adding/committing/pushing it. Then I created a new branch. Now I have updates in the new branch as well as the one small update in the main branch and I cannot get them to merge both locally and in the remote repository. It seems that it's one or the other and they keep writing over each other.
+
+## Conclusion
+Well, I finished the tutorial. I refreshed my memory about many of the basics about Laravel and got a lot of practice using Git with GitHub.
