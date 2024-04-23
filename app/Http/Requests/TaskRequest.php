@@ -26,7 +26,16 @@ class TaskRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'notes' => ['nullable', 'string'],
-            'due_date' => ['nullable', 'date', new TodayOrFutureDate('Due Date')],
+            'due_date' => ['nullable', 'date', 'after_or_equal:today'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'Title is required.',
+            'description.required' => 'Description is required.',
+            'due_date.after_or_equal' => 'Due Date must be today or a future date.',
         ];
     }
 }
