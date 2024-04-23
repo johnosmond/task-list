@@ -5,7 +5,6 @@
 @section('content')
     <p>Welcome to the main page</p>
     <div>
-        {{-- @if (count($tasks)) --}}
         @forelse ($tasks as $task)
             <div>
                 <a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }}</a>
@@ -13,6 +12,11 @@
         @empty
             <div>There are no tasks</div>
         @endforelse
-        {{-- @endif --}}
+
+        @if ($tasks->count())
+            <nav>
+                {{ $tasks->links() }}
+            </nav>
+        @endif
     </div>
 @endsection
