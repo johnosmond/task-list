@@ -53,7 +53,7 @@
         @endisset
         <div>
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" value="{{ $task->title ?? old('title') }}">
+            <input type="text" name="title" id="title" value="{{old('title',  $task->title ?? null) }}">
             @error('title')
                 <p class="error">{{ $message }}</p>
             @enderror
@@ -61,7 +61,7 @@
 
         <div>
             <label for="description">Description</label>
-            <textarea name="description" id="description">{{ $task->description ?? old('description') }}</textarea>
+            <textarea name="description" id="description">{{ old('description', $task->description ?? null) }}</textarea>
             @error('description')
                 <p class="error">{{ $message }}</p>
             @enderror
@@ -69,14 +69,14 @@
 
         <div>
             <label for="notes">Notes</label>
-            <textarea name="notes" id="notes">{{ $task->notes ?? old('notes') }}</textarea>
+            <textarea name="notes" id="notes">{{ old('notes', $task->notes ?? null) }}</textarea>
             @error('notes')
                 <p class="error">{{ $message }}</p>
             @enderror
         </div>
         <div>
             <label for="due_date">Due Date</label>
-            <input type="date" name="due_date" id="due_date" value="{{ $task->due_date ?? old('due_date') }}">
+            <input type="date" name="due_date" id="due_date" value="{{ old('due_date', $task->due_date ?? null) }}">
             @error('due_date')
                 <p class="error">{{ $message }}</p>
             @enderror
